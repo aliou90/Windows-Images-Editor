@@ -1,0 +1,36 @@
+1. pip install pyinstaller
+2. pyinstaller --onefile --windowed --name imgfastedit main.py
+Ou pour ajouter des données nécéssaires
+pyinstaller --onefile --windowed --add-data "assets;assets" --name imgfastedit main.py
+Ou avec icone
+pyinstaller --onefile --windowed --icon=assets/ico/Fast_Edit.ico --name imgfastedit main.py
+
+[COMPLET] : pyinstaller --onefile --windowed --add-data "assets;assets" --icon=assets/ico/Fast_Edit.ico --name imgfastedit main.py
+
+
+[MODULES REDONDANTS]
+pyinstaller --onefile --windowed --add-data "assets;assets" --icon=assets/ico/Fast_Edit.ico --hidden-import=tkinterdnd2 --hidden-import=tkinter --name imgfastedit main.py
+
+
+3. créer fichier `installer.nsi`
+# Nom du programme
+OutFile "imgfastedit_installer.exe"
+# Nom du répertoire d'installation
+InstallDir $PROGRAMFILES\imgfastedit
+# Page de bienvenue
+Page directory
+Page instfiles
+# Sections - Nom de l'application
+Section "Install"
+  # Création du répertoire
+  SetOutPath $INSTDIR
+  # Copie des fichiers
+  File "dist\imgfastedit.exe"
+  File /r "assets\*.*"
+  # Création des raccourcis
+  CreateShortcut "$DESKTOP\imgfastedit.lnk" "$INSTDIR\imgfastedit.exe"
+  CreateShortcut "$SMPROGRAMS\imgfastedit\imgfastedit.lnk" "$INSTDIR\imgfastedit.exe"
+SectionEnd
+
+4. Installer NSI (graphique)
+4. Créer l'installateur depuis l'app graphique NSI
